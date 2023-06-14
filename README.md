@@ -12,6 +12,9 @@
 ## Description
  keep it brief!
 
+<!-- powerup ideas: -->
+<!-- extra wide bullets -->
+<!-- multishot -->
 
 ## Setup/Installation Requirements
 

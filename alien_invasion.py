@@ -80,6 +80,11 @@ class AlienInvasion:
 
         # check for bullets that have hit
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        if not self.aliens:
+            # destroy active bullets & spawn new fleet
+            self.bullets.empty()
+            self._create_fleet()
     
     def _fire_bullet(self):
         # creates bullet & adds to the bullet group
