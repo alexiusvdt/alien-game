@@ -33,15 +33,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-
-            # cleanup offscreen bullets. python expecrts the list to stay at same len, so we use a copy to modify
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-            # just for checking bullet counts are removed
-            # print(len(self.bullets))
-
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self):      
@@ -73,6 +65,15 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    def _update_bullets(self):
+        self.bullets.update()
+        # cleanup offscreen bullets. python expecrts the list to stay at same len, so we use a copy to modify
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        # just for checking bullet counts are removed
+        # print(len(self.bullets))
+    
     def _fire_bullet(self):
         # creates bullet & adds to the bullet group
         if len(self.bullets) < self.settings.bullets_allowed:
