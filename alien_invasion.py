@@ -1,10 +1,13 @@
 import sys
+from time import sleep
 import pygame
 
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from game_stats import GameStats
+
 
 class AlienInvasion:
     """Game-level class to manage assets & behavior"""
@@ -24,6 +27,7 @@ class AlienInvasion:
         # self.settings.screen_width = self.screen.get_rect().width
                 
         pygame.display.set_caption("Alien Invasion")
+        self.stats = GameStats(self)
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -50,7 +54,6 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)  
         
-            
     def _check_keydown_events(self, event):
         # respond to key presses
         if event.key == pygame.K_RIGHT:
@@ -75,10 +78,10 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-        # just for checking bullet counts are removed
-        # print(len(self.bullets))
+        self._check_bullet_alien_collisions()
 
-        # check for bullets that have hit
+    def _check_bullet_alien_collisions(self):
+        """handle collisions"""
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         if not self.aliens:
@@ -91,7 +94,6 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
-    
     
     def _update_screen(self):
         # redraw the screen during each pass w/ the color prop
@@ -137,6 +139,9 @@ class AlienInvasion:
         self._check_fleet_edges()
         self.aliens.update()
 
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            self._ship_hit() 
+
     def _check_fleet_edges(self):
         """logic for aliens hitting an edge"""
         for alien in self.aliens.sprites():
@@ -150,7 +155,20 @@ class AlienInvasion:
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1 
 
+    def _ship_hit(self):
+        """respond to ship getting hit by aliens"""
+        self.stats.ships_left -= 1
 
+        # clear the board
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # create new fleet & reset to center
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # pause
+        sleep(0.5)
 
 if __name__ == '__main__':
     # make a game instance & run
