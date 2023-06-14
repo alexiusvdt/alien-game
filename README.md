@@ -16,6 +16,8 @@
 <!-- extra wide bullets -->
 <!-- multishot -->
 
+<!-- add press key to start -->
+
 ## Setup/Installation Requirements
 
 
