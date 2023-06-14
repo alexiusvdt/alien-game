@@ -77,6 +77,9 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
         # just for checking bullet counts are removed
         # print(len(self.bullets))
+
+        # check for bullets that have hit
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
     
     def _fire_bullet(self):
         # creates bullet & adds to the bullet group
