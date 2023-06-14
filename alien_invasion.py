@@ -12,11 +12,16 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
-        # display size set up, this can be changed later but hardcoded for now
-        # in pygame, every element is its own surface
+        # windowed
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height)
         )
+        
+        # fullscreen
+        # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        # self.settings.screen_height = self.screen.get_rect().height
+        # self.settings.screen_width = self.screen.get_rect().width
+                
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
@@ -42,8 +47,10 @@ class AlienInvasion:
         # respond to key presses
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
-        if event.key == pygame.K_LEFT:
+        elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_q:
+            sys.exit()
 
     def _check_keyup_events(self, event):
         #  respond to key releases
