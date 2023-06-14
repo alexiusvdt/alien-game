@@ -15,13 +15,16 @@ class Ship:
         # place new ship at bottom
         self.rect.midbottom = self.screen_rect.midbottom
 
-        # right movement flag
+        # right movement flags
         self.moving_right = False
+        self.moving_left = False
 
     def update(self):
-        # update the ships position based on movement flag status
+        # update the ships position based on movement flags
         if self.moving_right:
             self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
 
 
     def blitme(self):
