@@ -24,17 +24,22 @@ class AlienInvasion:
     def run_game(self):
         """start game loop"""
         while True:
-            # watch for events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-                
-                # redraw the screen during each pass w/ the color prop
-                self.screen.fill(self.settings.bg_color)
-                self.ship.blitme()
+            self._check_events()
+            self._update_screen()
 
-                # make most recently drawn screen visible
-                pygame.display.flip()
+    def _check_events(self):      
+        # watch for events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            
+    def _update_screen(self):
+        # redraw the screen during each pass w/ the color prop
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+
+        # make most recently drawn screen visible
+        pygame.display.flip()
 
 if __name__ == '__main__':
     # make a game instance & run
