@@ -5,7 +5,7 @@ class Alien(Sprite):
     """a single alien creator"""
     def __init__(self, ai_game):
         """initialize & set starting pos"""
-        super().__init()
+        super().__init__()
         self.screen = ai_game.screen
 
         # load the image and set the rect

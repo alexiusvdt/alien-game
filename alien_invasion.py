@@ -18,7 +18,6 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height)
         )
-        
         # fullscreen
         # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
         # self.settings.screen_height = self.screen.get_rect().height
@@ -28,6 +27,9 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
         """start game loop"""
@@ -88,9 +90,15 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
 
         # make most recently drawn screen visible
         pygame.display.flip()
+
+    def _create_fleet(self):
+        """create a fleet of aliens, what do you think this does?"""    
+        alien = Alien(self)
+        self.aliens.add(alien)
 
 if __name__ == '__main__':
     # make a game instance & run
