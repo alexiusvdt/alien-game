@@ -9,6 +9,7 @@ class Bullet(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.color = self.settings.bullet_color
+        self.bullets_allowed = 4
 
         # create bullet rect and set pos
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)

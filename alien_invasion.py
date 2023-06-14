@@ -34,6 +34,14 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+
+            # cleanup offscreen bullets. python expecrts the list to stay at same len, so we use a copy to modify
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+            # just for checking bullet counts are removed
+            # print(len(self.bullets))
+
             self._update_screen()
 
     def _check_events(self):      
@@ -67,8 +75,9 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         # creates bullet & adds to the bullet group
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
     
     
     def _update_screen(self):
