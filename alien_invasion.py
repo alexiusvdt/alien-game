@@ -72,6 +72,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
             # clear any old game stuff
             self.aliens.empty()
             self.bullets.empty()
@@ -109,7 +110,7 @@ class AlienInvasion:
         self._check_bullet_alien_collisions()
 
     def _check_bullet_alien_collisions(self):
-        """handle collisions"""
+        """handle collisions & level transitions"""
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         if collisions: 
@@ -123,6 +124,8 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+            self.stats.level += 1
+            self.sb.prep_level()
     
     def _fire_bullet(self):
         # creates bullet & adds to the bullet group
