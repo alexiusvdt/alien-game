@@ -23,6 +23,7 @@ class Settings:
 
         # game scaling modifier
         self.speedup_scale = 1.1
+        self.score_scale = 1.5
 
         self.initialize_dynamic_settings()
 
@@ -38,6 +39,9 @@ class Settings:
         self.fleet_direction = 1
 
     def increase_speed(self):
+        """increase speed and alien point values per modifiers"""
         self.ship_speed += self.speedup_scale
         self.bullet_speed += self.speedup_scale
         self.alien_speed += self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
