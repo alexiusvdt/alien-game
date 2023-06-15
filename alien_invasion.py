@@ -72,14 +72,15 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
-            # hide the cursor
-            pygame.mouse.set_visible(False)
             # clear any old game stuff
             self.aliens.empty()
             self.bullets.empty()
             # start fresh
             self._create_fleet()
             self.ship.center_ship()
+
+            # hide the cursor
+            pygame.mouse.set_visible(False)
 
     def _check_keydown_events(self, event):
         # respond to key presses
@@ -115,6 +116,7 @@ class AlienInvasion:
             for aliens in collisions.values():    
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score()
         
         if not self.aliens:
             # destroy active bullets & spawn new fleet
@@ -209,7 +211,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
-            pygame.mouse.set_visible = True
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):
         """check if any have made it to the bottom"""
