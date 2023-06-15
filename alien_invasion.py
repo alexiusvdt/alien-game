@@ -66,13 +66,16 @@ class AlienInvasion:
                 self._check_play_button(mouse_pos)
 
     def _check_play_button(self, mouse_pos):
+        """handles game start/end features including prepping scoreboard assets"""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
+            # set up the game, clearing 
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
             self.sb.prep_level()
+            self.sb.prep_ships()
             # clear any old game stuff
             self.aliens.empty()
             self.bullets.empty()
@@ -204,6 +207,7 @@ class AlienInvasion:
         """respond to ship getting hit by aliens"""
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
             # clear the board
             self.aliens.empty()
             self.bullets.empty()

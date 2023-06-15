@@ -1,6 +1,6 @@
-# (Application Name)
+# 👽Alien Invasion👽
 
-#### (Brief Description of Application)
+#### shoot 'em all!
 
 #### By Alex Johnson
 
@@ -17,16 +17,18 @@
 <!-- multishot -->
 
 <!-- add press key to start -->
+<!-- high score persistance -->
 
 ## Setup/Installation Requirements
-
+install pygame
+clone this repo
+launch!
 
 ## Known Bugs
 
 
-
 ## Additional Thanks
-
+Eric Matthes for the helpful crash course & creative spark!
 
 ## Future implementations
 
