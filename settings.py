@@ -32,6 +32,8 @@ class Settings:
         self.bullet_speed = 1.25
         self.alien_speed = 1.0
 
+        self.alien_points = 50
+
         # 1 represents right, -1 represents left
         self.fleet_direction = 1
 
