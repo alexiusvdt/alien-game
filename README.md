@@ -20,9 +20,23 @@
 <!-- high score persistance -->
 
 ## Setup/Installation Requirements
-install pygame
-clone this repo
-launch!
+
+Go to the application folder:
+```
+.venv\scripts\activate
+```
+
+Install the dependencies:
+```
+pip install -r requirements.txt
+```
+
+Run the game:
+```
+py alien_invasion.py
+```
+
+Have fun!
 
 ## Known Bugs
 
