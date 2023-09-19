@@ -1,6 +1,6 @@
 # 👽Alien Invasion👽
 
-#### shoot 'em all!
+#### shoot 'em all! 
 
 #### By Alex Johnson
 
@@ -10,7 +10,7 @@
 * pygame
 
 ## Description
- keep it brief!
+ A simple implementation of the classic alien shooter.
 
 <!-- powerup ideas: -->
 <!-- extra wide bullets -->
